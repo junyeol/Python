@@ -3,6 +3,7 @@
 
 import csv
 
+
 file_path = "test.csv"##경로설정
 
 ##파일명, 어떤모드로 읽을지, 인코딩, 객체명
