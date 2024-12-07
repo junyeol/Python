@@ -2,10 +2,6 @@ import csv
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-# 필터링 기준 날짜
-start_date = datetime(2020, 1, 20)
-end_date = datetime(2021, 6, 30)
-
 # USD 데이터 읽기
 usd_file = "ALL.csv"
 dates_usd = []    # 날짜
@@ -18,13 +14,12 @@ with open(usd_file, mode='r') as file:
 
     for row in reader:
         date = datetime.strptime(row[0], "%Y-%m-%d")  # 날짜 형식 변환
-        if start_date <= date <= end_date:  # 필터링 조건
-            usd_value = float(row[1])  # USD 값
-            stock_value = int(row[2])  # 주식 거래량
+        usd_value = float(row[1])  # USD 값
+        stock_value = int(row[2])  # 주식 거래량
 
-            dates_usd.append(date)
-            usd.append(usd_value)
-            stocks.append(stock_value / 1e9)  # 주식 데이터를 10억 단위로 나눔
+        dates_usd.append(date)
+        usd.append(usd_value)
+        stocks.append(stock_value / 1e9)  # 주식 데이터를 10억 단위로 나눔
 
 # USD 데이터 정규화
 usd_min, usd_max = min(usd), max(usd)
@@ -41,11 +36,10 @@ with open(cpi_file, mode='r') as file:
 
     for row in reader:
         date = datetime.strptime(row[0], "%Y.%m")  # 월별 날짜 형식 변환
-        if start_date <= date <= end_date:  # 필터링 조건
-            cpi_value = float(row[1])  # CPI 값
+        cpi_value = float(row[1])  # CPI 값
 
-            dates_cpi.append(date)
-            cpi_values.append(cpi_value)
+        dates_cpi.append(date)
+        cpi_values.append(cpi_value)
 
 # 시각화를 위한 그래프 설정
 fig, ax1 = plt.subplots(figsize=(14, 7))  # 하나의 그래프를 그리기 위한 subplot 생성
