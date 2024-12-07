@@ -50,7 +50,7 @@ plt.plot(dates, average_market_cap, label="Average Market Cap (USD)", color='b')
 plt.plot(dates, average_total_volume, label="Average Total Volume (USD)", color='g')
 
 # 그래프 제목 및 레이블 설정
-plt.title("Daily Averages of Market Cap and Total Volume", fontsize=15)
+plt.title("Daily Market Cap and Total Volume", fontsize=15)
 plt.xlabel("Date", fontsize=12)
 plt.ylabel("USD", fontsize=12)
 

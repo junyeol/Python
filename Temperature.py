@@ -1,47 +1,42 @@
-# [데이터 시각화]
-
 import csv
 import matplotlib.pyplot as plt
-## pip install matplotlib
 
-file_path = "test.csv"
+# 파일 경로 설정
+file_path = "CPI.csv"
 
+# 날짜와 CPI 값을 저장할 리스트
 dates = []
-temps = []
+cpi_values = []
 
-with open(file_path,mode='r') as file :
+# CSV 파일을 읽어서 데이터 처리
+with open(file_path, mode='r') as file:
     reader = csv.reader(file)
+    
+    # 첫 번째 줄은 헤더이므로 건너뛰기
+    next(reader)
+    
+    # CSV 데이터를 순차적으로 읽으면서 날짜와 CPI 값을 추출
+    for row in reader:
+        # 첫 번째 열은 '시점', 두 번째 열은 '전국' 데이터 (CPI)
+        date = row[0]  # 예: 2010.01, 2010.02 등
+        cpi = float(row[1])  # 소비자물가지수 값을 실수로 변환
+        
+        # 리스트에 날짜와 CPI 값을 추가
+        dates.append(date)
+        cpi_values.append(cpi)
 
-    header = next(reader)
+# 그래프 그리기
+plt.figure(figsize=(10, 6))  # 그래프 크기 설정
+plt.plot(dates, cpi_values, color='b', linestyle='-', linewidth=2)
 
-# Alt + 3, 4
-##    i = 0
-    for row in reader :
-        a = row[2]
-        b = row[-2]
-        if a.startswith("Dec") :
-            print(a, b)
-            dates.append(a)
-            temps.append(float(b))
-##            i += 1
-##            if i == 10 :
-##                break
+# 그래프 제목과 축 레이블 설정
+plt.title("CPI", fontsize=16)
+plt.xlabel("date", fontsize=12)
+plt.ylabel("CPI", fontsize=12)
 
+# x축 레이블 회전 (읽기 쉽도록)
+plt.xticks(rotation=45, ha="right")
 
-
-plt.plot(dates,temps,marker='o',color='r',linestyle=':',linewidth=10,markersize=5)
-plt.title("Temperature in December", fontsize=15)
-plt.xlabel("Date", fontsize=10)
-plt.ylabel("Temperature", fontsize=10)
+# 그래프 표시
+plt.tight_layout()
 plt.show()
-
-# 과제 1) 막대 그래프로 기온 출력
-# 과제 2) 선 그래프 2개를 한 화면에 출력
-#       ex) 겨울 최저기온 + 여름 최고기온
-
-
-
-
-
-
-            

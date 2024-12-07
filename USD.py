@@ -9,7 +9,7 @@ dates = []
 usd_values = []
 
 # CSV 파일을 읽어서 데이터 처리
-with open(file_path, mode='r') as file:  # 파일을 읽을 때 인코딩을 'utf-8'로 설정
+with open(file_path, mode='r', encoding='utf-8') as file:  # 파일을 읽을 때 인코딩을 'utf-8'로 설정
     reader = csv.reader(file)
     
     # 첫 번째 줄은 헤더이므로 건너뛰기

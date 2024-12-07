@@ -33,6 +33,10 @@ with open(file_path, mode='r') as file:
 # 그래프 그리기
 plt.plot(dates, USD, color='r')
 
+# x축 범위를 설정 (2023년 3월 31일까지)
+end_date = datetime(2023, 3, 31)
+plt.xlim(min(dates), end_date)
+
 # 그래프 제목 및 레이블 설정
 plt.title("Gold Prices in USD", fontsize=15)
 plt.xlabel("Date", fontsize=10)
