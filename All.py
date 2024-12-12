@@ -5,7 +5,7 @@ from datetime import datetime
 # USD 데이터 읽기
 usd_file = "ALL.csv"
 dates_usd = []    # 날짜
-stocks = []       # 주식 거래량
+stocks = []       # 주식 시장 데이터
 usd = []          # USD 값
 
 with open(usd_file, mode='r') as file:
@@ -15,7 +15,7 @@ with open(usd_file, mode='r') as file:
     for row in reader:
         date = datetime.strptime(row[0], "%Y-%m-%d")  # 날짜 형식 변환
         usd_value = float(row[1])  # USD 값
-        stock_value = int(row[2])  # 주식 거래량
+        stock_value = int(row[2])  # 주식 시장 데이터
 
         dates_usd.append(date)
         usd.append(usd_value)
@@ -44,11 +44,11 @@ with open(cpi_file, mode='r') as file:
 # 시각화를 위한 그래프 설정
 fig, ax1 = plt.subplots(figsize=(14, 7))  # 하나의 그래프를 그리기 위한 subplot 생성
 
-# 첫 번째 y축: 주식 거래량 선 그래프
-ax1.plot(dates_usd, stocks, color='tan', label='Stock Market Volume (Billion)', linewidth=2)
+# 첫 번째 y축: 주식 시장 선 그래프
+ax1.plot(dates_usd, stocks, color='tan', label='Stock Market (Billion)', linewidth=2)
 ax1.plot(dates_usd, usd_normalized, color='red', label='USD Exchange Rate (Normalized)', linewidth=2)
 ax1.set_xlabel('Date')
-ax1.set_ylabel('Stock Volume (Billion) / Normalized USD', color='black')
+ax1.set_ylabel('Stock (Billion) / Normalized USD', color='black')
 ax1.tick_params(axis='y', labelcolor='black')
 
 # 두 번째 y축: CPI 데이터 (선 그래프)
@@ -60,12 +60,10 @@ ax2.tick_params(axis='y', labelcolor='blue')
 # x축 날짜 포맷 및 레이블 설정
 plt.xticks(rotation=45)
 ax1.xaxis.set_major_formatter(plt.matplotlib.dates.DateFormatter("%Y-%m"))
-ax1.xaxis.set_major_locator(plt.matplotlib.dates.MonthLocator(interval=3))  # 3개월 간격 표시
-
 # 범례 추가
 fig.legend(loc="upper left", bbox_to_anchor=(0.1, 0.9))
 
 # 그래프 제목 및 레이아웃
-plt.title("USD, Stock Market Volume, and CPI Trends", fontsize=16)
+plt.title("USD, Stock Market, and CPI Trends", fontsize=16)
 plt.tight_layout()
 plt.show()
